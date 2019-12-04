@@ -1,10 +1,11 @@
 const express = require("express");
 const router = new express.Router();
-const shoppingCartModel = require("./../models/User");
+const shoppingCartModel = require("./../models/ShoppingCart");
 
-router.get("/users", (req, res) => {
-    userModel
+router.get("/shoppingCart", (req, res) => {
+    shoppingCartModel
     .find()
+    .populate("vetement")
     .then(dbRes => {
         res.status(200).send(dbRes);
     })
@@ -13,8 +14,8 @@ router.get("/users", (req, res) => {
     });
 });
 
-router.get("/users/:id", (req, res) => {
-    userModel
+router.get("/shoppingCart/:id", (req, res) => {
+    shoppingCartModel
     .findById(req, params, id)
     .then(dbRes => {
         res.status(200).send(dbRes)
@@ -24,7 +25,7 @@ router.get("/users/:id", (req, res) => {
 })
 
 router.post("/", (req, res) => {
-    userModel
+    shoppingCartModel
     .create(req.body)
     .then(dbRes => {
         res.status(200).send(dbRes);
@@ -35,3 +36,4 @@ router.post("/", (req, res) => {
 })
 
 module.exports = router;
+

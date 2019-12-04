@@ -1,7 +1,6 @@
 const express = require("express");
 const router = new express.Router();
 const vetementModel = require("./../models/Vetement");
-const lingeroeModel = require("./../models/Lingerie");
 
 router.get("/vetements", (req, res) => {
     vetementModel
@@ -26,7 +25,7 @@ router.get("/vetements/:id", (req, res) => {
 })
 
 router.post("/vetements", (req, res) => {
-    vetementsModel
+    vetementModel
     .create(req.body)
     .then(dbRes => {
         res.status(200).send(dbRes)
