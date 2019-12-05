@@ -18,10 +18,12 @@ server.get("/", (req, res) => {
 
 const usersRouter = require("./routes/users");
 const vetementsRouter = require("./routes/vetements");
+const lingeriesRouter = require("./routes/lingeries");
 const shoppingCartRouter = require("./routes/shoppingCart");
 
 server.use(usersRouter);
 server.use(vetementsRouter);
+server.use(lingeriesRouter);
 server.use(shoppingCartRouter);
 
 server.listen(process.env.PORT, () => {
