@@ -21,7 +21,7 @@ const vetementSchema = new Schema({
   price: Number,
   quantity: {
     type: [String],
-    enum: ["1", "2", "3", "4", "5", "6", "7", "8", "50"]
+    enum: ["1", "2", "3", "4", "5", "6", "7", "8", "10"]
   }
 });
 
