@@ -2,19 +2,37 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-userName: String,
-address: {
-street: String,
-zipCode: Number,
-city: String
-},
-email: String,
-password: String,
-role: {
-type: String,
-default: "user"
-}
-})
+  userName: {
+    type: String,
+    default: "anomym"
+  },
+  address: {
+    street: String,
+    zipCode: Number,
+    city: String
+  },
+  email: String,
+  password: String,
+  role: {
+    type: String,
+    enum: ["admin", "user"],
+    default: "user"
+  },
+  favorites: {
+    vetements: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Vetement"
+      }
+    ],
+    lingerie: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Lingerie"
+      }
+    ]
+  }
+});
 
 const userModel = mongoose.model("User", userSchema);
 module.exports = userModel;

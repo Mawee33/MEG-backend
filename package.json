@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.7",
     "cloudinary": "^1.17.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
