@@ -7,6 +7,7 @@ const express = require("express");
 const server = express();
 const passport = require("passport");
 const cors = require("cors");
+const session = require("express-session");
 
 server.use(express.json());
 
@@ -28,7 +29,19 @@ server.use(usersRouter);
 server.use(vetementsRouter);
 server.use(lingeriesRouter);
 server.use(shoppingCartRouter);
-server.use(authRouter);
+server.use(`/api`, authRouter);
+
+// ADD SESSION SETTINGS HERE:
+server.use(session({
+    secret:"some secret goes here",
+    resave: true,
+    saveUninitialized: true
+  }));
+
+  // USE passport.initialize() and passport.session() HERE:
+server.use(passport.initialize());
+server.use(passport.session());
+  
 
 server.listen(process.env.PORT, () => {
   console.log("MEG started @ http://localhost:" + process.env.PORT);
