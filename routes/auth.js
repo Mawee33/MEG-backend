@@ -28,18 +28,22 @@ router.post("/signup", (req, res, next) => {
   const { userName, password, email } = req.body;
   // @todo : best if email validation here or check with a regex in the User model
   if (!password || !email) errorMsg += "Provide email and password.\n";
+  
   if (password.length < minPasswordLength)
     errorMsg += `Please make your password at least ${minPasswordLength} characters.`;
-  if (errorMsg) return res.status(403).json(errorMsg); // 403   Forbidden
+  
+ if (errorMsg) return res.status(403).json(errorMsg); // 403   Forbidden
   const salt = bcrypt.genSaltSync(10);
   // more on encryption : https://en.wikipedia.org/wiki/Salt_(cryptography)
   const hashPass = bcrypt.hashSync(password, salt);
+  
   const newUser = {
     userName,
     email,
     password: hashPass
   };
   // check if an avatar FILE has been posted
+  
   userModel
     .create(newUser)
     .then(newUserFromDB => {
