@@ -8,6 +8,13 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 const uploader = require("./../config/cloudinary");
 const minPasswordLength = 4;
+
+// Registering SIGNUP
+
+router.get("/signup", (req, res) => {
+  res.render("auth/signup");
+});
+
 /*
   learn more about session, cookies, token here =>
   https://www.youtube.com/watch?v=2PPSXonhIck&t=1809s
@@ -54,6 +61,10 @@ router.post("/signup", (req, res, next) => {
 
 router.post("/signin", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
+    console.log("ici signin ---->");
+    console.log("err", err);
+    console.log("user ?", user);
+
     if (err || !user) return res.status(403).json("invalid user infos"); // 403 : Forbidden
     /**
      * req.Login is a passport method
@@ -95,8 +106,16 @@ router.post("/signout", (req, res, next) => {
 router.use("/is-loggedin", (req, res, next) => {
   if (req.isAuthenticated()) {
     // method provided by passport
-    const { _id, userName, address, favorites, email, password, role } = req.user;
-    
+    const {
+      _id,
+      userName,
+      address,
+      favorites,
+      email,
+      password,
+      role
+    } = req.user;
+
     return res.status(200).json({
       currentUser: {
         _id,
@@ -112,4 +131,3 @@ router.use("/is-loggedin", (req, res, next) => {
   res.status(403).json("Unauthorized");
 });
 module.exports = router;
-
