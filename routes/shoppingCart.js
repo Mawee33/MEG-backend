@@ -35,5 +35,17 @@ router.post("/", (req, res) => {
     })
 })
 
+router.delete("/shoppingCart/:id", (req, res) => {
+    // console.log(req.params.id)
+    // res.send("at todo delete item from cart")
+    shoppingCartModel
+    .findByIdAndDelete(req, params, id)
+    .then(dbRes => {
+        res.status(200).send(dbRes)
+    })
+    .catch(err);
+    res.status(500).send(err);
+})
+
 module.exports = router;
 
