@@ -66,8 +66,6 @@ router.post("/signup", (req, res, next) => {
 router.post("/signin", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
     console.log("ici signin ---->");
-    console.log("err", err);
-    console.log("user ?", user);
 
     if (err || !user) return res.status(403).json("invalid user infos"); // 403 : Forbidden
     /**
@@ -81,6 +79,7 @@ router.post("/signin", (req, res, next) => {
         return res.json({ message: "Something went wrong logging in" });
       }
       // We are now logged in
+      console.log("succeed connection");
       // You may find usefull to send some other infos
       // dont send sensitive informations back to the client
       // let's choose the exposed user below
@@ -103,8 +102,9 @@ router.post("/signin", (req, res, next) => {
 });
 
 router.post("/signout", (req, res, next) => {
-  req.logout(); // utility function provided by passport
-  res.json({ message: "Success" });
+  console.log("yo déconnecté");
+  req.logout();
+  res.json({ message: "Déconnecté" });
 });
 
 router.use("/is-loggedin", (req, res, next) => {
