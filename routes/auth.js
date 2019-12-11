@@ -23,27 +23,27 @@ router.get("/signup", (req, res) => {
 // https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 router.post("/signup", (req, res, next) => {
   // console.log("file ?", req.file);
-  // console.log(req.body);
+
   var errorMsg = "";
   const { userName, password, email } = req.body;
   // @todo : best if email validation here or check with a regex in the User model
   if (!password || !email) errorMsg += "Provide email and password.\n";
-  
+
   if (password.length < minPasswordLength)
     errorMsg += `Please make your password at least ${minPasswordLength} characters.`;
-  
- if (errorMsg) return res.status(403).json(errorMsg); // 403   Forbidden
+
+  if (errorMsg) return res.status(403).json(errorMsg); // 403   Forbidden
   const salt = bcrypt.genSaltSync(10);
   // more on encryption : https://en.wikipedia.org/wiki/Salt_(cryptography)
   const hashPass = bcrypt.hashSync(password, salt);
-  
+
   const newUser = {
     userName,
     email,
     password: hashPass
   };
   // check if an avatar FILE has been posted
-  
+
   userModel
     .create(newUser)
     .then(newUserFromDB => {
@@ -77,13 +77,14 @@ router.post("/signin", (req, res, next) => {
     req.logIn(user, function(err) {
       /* doc says: When the login operation completes, user will be assigned to req.user. */
       if (err) {
+        console.log(err);
         return res.json({ message: "Something went wrong logging in" });
       }
       // We are now logged in
       // You may find usefull to send some other infos
       // dont send sensitive informations back to the client
       // let's choose the exposed user below
-      const { _id, userName, email, favorites, role } = user;
+      const { _id, address, userName, email, favorites, role } = user;
       // and only expose non-sensitive inofrmations to the client's state
       next(
         res.status(200).json({
@@ -92,7 +93,6 @@ router.post("/signin", (req, res, next) => {
             userName,
             address,
             email,
-            password,
             role,
             favorites
           }

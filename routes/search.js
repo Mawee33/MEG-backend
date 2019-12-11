@@ -3,7 +3,7 @@ const router = new express.Router();
 const lingerieModel = require("../models/Lingerie");
 const vetementModel = require("../models/Vetement");
 
-router.get("/search", async (req, res) => {
+router.get("/", async (req, res) => {
   console.log(req.query);
   const regExp = new RegExp(req.query.q, "i");
 
