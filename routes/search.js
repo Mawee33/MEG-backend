@@ -3,7 +3,7 @@ const router = new express.Router();
 const lingerieModel = require("../models/Lingerie");
 const vetementModel = require("../models/Vetement");
 
-router.get("/", async (req, res) => {
+router.get("/search", async (req, res) => {
   console.log(req.query);
   const regExp = new RegExp(req.query.q, "i");
 
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
   const lingerieSearch = lingerieModel.find({
     name: regExp
   });
-
+console.log("ici")
   try {
     const dbRes = await Promise.all([vetementSearch, lingerieSearch]);
 
@@ -24,3 +24,5 @@ router.get("/", async (req, res) => {
     res.status(500).end();
   }
 });
+
+module.exports = router;

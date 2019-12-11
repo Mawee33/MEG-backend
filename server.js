@@ -29,8 +29,7 @@ const corsOptions = {
   optionsSuccessStatus: 200
 };
 
-server.use(cors(corsOptions))
-
+server.use(cors(corsOptions));
 
 // USE passport.initialize() and passport.session() HERE:
 server.use(passport.initialize());
@@ -71,12 +70,14 @@ const vetementsRouter = require("./routes/vetements.js");
 const lingeriesRouter = require("./routes/lingeries.js");
 const shoppingCartRouter = require("./routes/shoppingCart.js");
 const authRouter = require("./routes/auth.js");
+const searchRouter = require("./routes/search");
 
 server.use(usersRouter);
 server.use(vetementsRouter);
 server.use(lingeriesRouter);
 server.use(shoppingCartRouter);
 server.use(authRouter);
+server.use(searchRouter);
 
 // KICKSTART
 server.listen(process.env.PORT, () => {
