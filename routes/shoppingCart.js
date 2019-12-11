@@ -5,7 +5,7 @@ const shoppingCartModel = require("./../models/ShoppingCart");
 router.get("/shoppingCart", (req, res) => {
     shoppingCartModel
     .find()
-    .populate("vetement")
+    .populate("product")
     .then(dbRes => {
         res.status(200).send(dbRes);
     })

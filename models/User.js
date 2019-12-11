@@ -19,18 +19,12 @@ const userSchema = new Schema({
     default: "user"
   },
   favorites: {
-    vetements: [
+    product: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Vetement"
+        ref: ["Vetement", "Lingerie"]
       }
     ],
-    lingerie: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Lingerie"
-      }
-    ]
   }
 });
 
