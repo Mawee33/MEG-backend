@@ -1,11 +1,13 @@
 const express = require("express");
 const router = new express.Router();
 const lingerieModel = require("./../models/Lingerie");
+const uploader = require("./../config/cloudinary");
 
 router.get("/lingeries", (req, res) => {
     lingerieModel
     .find()
     .then(dbRes => {
+        console.log("here2")
         res.status(200).send(dbRes);
     })
     .catch(dbErr => {
@@ -24,9 +26,13 @@ router.get("/lingeries/:id", (req, res) => {
     })
 })
 
-router.post("/lingeries", (req, res) => {
+router.post("/lingeries", uploader.single("image"), (req, res) => {
+    console.log("here");
+    const infos = { ...req.body };
+  if (req.file) infos.image = req.file.secure_url;
+  console.log(infos);
     lingerieModel
-    .create(req.body)
+    .create(infos)
     .then(dbRes => {
         res.status(200).send(dbRes)
     })
