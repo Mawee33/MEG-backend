@@ -8,7 +8,6 @@ const server = express();
 const passport = require("passport");
 const cors = require("cors");
 const session = require("express-session");
-const _DEVMODE = false;
 
 server.use(express.json());
 
@@ -35,27 +34,6 @@ server.use(cors(corsOptions));
 server.use(passport.initialize());
 server.use(passport.session());
 
-//------------------------------------------
-// Check Loggedin Users
-// ------------------------------------------
-server.use(function setDevTestLoggedinUser(req, res, next) {
-  if (_DEVMODE === true) {
-    console.log(`
-      ***
-      dev mode on ? ${_DEVMODE} !`);
-    req.user = {
-      _id: "5de525245bd24cfeb10abeb9",
-      username: "meg",
-      email: "meg@meg.com",
-      role: "admin",
-      favorites: {
-        vetements: [],
-        lingeries: []
-      }
-    };
-  }
-  next();
-});
 //------------------------------------------
 // BASE BACKEND ROUTE
 // ------------------------------------------

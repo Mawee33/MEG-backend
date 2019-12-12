@@ -116,7 +116,6 @@ router.use("/is-loggedin", (req, res, next) => {
       address,
       favorites,
       email,
-      password,
       role
     } = req.user;
 
@@ -127,7 +126,6 @@ router.use("/is-loggedin", (req, res, next) => {
         address,
         email,
         favorites,
-        password,
         role
       }
     });
