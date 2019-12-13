@@ -14,8 +14,8 @@ const lingerieSchema = new Schema({
     enum: ["soutien-gorge", "culotte", "maillot de bain", "homewear", "pyjama"]
   },
   color: String,
-  size: {
-    type: [String],
+  size: [{
+    type: String,
     enum: [
       "34",
       "36",
@@ -47,7 +47,7 @@ const lingerieSchema = new Schema({
       "100E",
       "105E"
     ]
-  },
+  }],
   price: Number,
   quantity: {
     type: [String],

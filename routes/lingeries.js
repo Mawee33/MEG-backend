@@ -27,8 +27,14 @@ router.get("/lingeries/:id", (req, res) => {
 })
 
 router.post("/lingeries", uploader.single("image"), (req, res) => {
-    console.log("here");
+    console.log(req.body);
     const infos = { ...req.body };
+    infos.size = JSON.parse(infos.size);
+    infos.size.forEach((s) => console.log(typeof s));
+    // )
+    console.log("infos.size");
+    console.log(infos.size);
+    // return res.send("ok")
   if (req.file) infos.image = req.file.secure_url;
   console.log(infos);
     lingerieModel
