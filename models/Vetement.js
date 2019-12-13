@@ -16,6 +16,10 @@ const vetementSchema = new Schema({
   color: String,
   size: {
     type: [String],
+    validator: function(v) {
+      console.log("here =>", v);
+      return /\d{3}-\d{3}-\d{4}/.test(v);
+    },
     enum: ["34", "36", "38", "40", "42", "44", "46", "48", "50"]
   },
   price: Number,
