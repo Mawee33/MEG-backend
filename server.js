@@ -49,6 +49,7 @@ const lingeriesRouter = require("./routes/lingeries.js");
 const shoppingCartRouter = require("./routes/shoppingCart.js");
 const authRouter = require("./routes/auth.js");
 const searchRouter = require("./routes/search");
+const contactRouter = require("./routes/contact");
 
 server.use(usersRouter);
 server.use(vetementsRouter);
@@ -56,6 +57,7 @@ server.use(lingeriesRouter);
 server.use(shoppingCartRouter);
 server.use(authRouter);
 server.use(searchRouter);
+server.use(contactRouter);
 
 // KICKSTART
 server.listen(process.env.PORT, () => {

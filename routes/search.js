@@ -14,10 +14,10 @@ router.get("/search", async (req, res) => {
   const lingerieSearch = lingerieModel.find({
     name: regExp
   });
-console.log("ici")
+  console.log("ici");
   try {
     const dbRes = await Promise.all([vetementSearch, lingerieSearch]);
-
+    console.log(dbRes);
     res.json({ vetements: dbRes[0], lingeries: dbRes[1] });
   } catch (dbErr) {
     console.log(dbErr);
