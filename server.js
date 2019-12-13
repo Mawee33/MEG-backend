@@ -1,6 +1,6 @@
 require("dotenv").config();
 require("./config/mongo");
-require("./config/dbConfig");
+// require("./config/dbConfig");
 require("./config/passport");
 
 const express = require("express");
