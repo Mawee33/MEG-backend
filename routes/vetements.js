@@ -37,6 +37,7 @@ router.post("/vetements", uploader.single("image"), (req, res) => {
       res.status(200).send(dbRes);
     })
     .catch(dbErr => {
+      console.log(dbErr)
       res.status(500).send(dbErr);
     });
 });
